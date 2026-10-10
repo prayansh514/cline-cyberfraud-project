@@ -2,6 +2,11 @@
 
 A privacy-first Chrome extension that watches WhatsApp Web for scam messages and malicious APK attachments. It checks messages locally, masks personal details, asks a small stateless AI agent for a verdict, and then outlines dangerous messages in red and disables their links.
 
+## 🚀 Hackathon Deliverables
+
+- 🎥 **[Watch the Demo Video](https://drive.google.com/file/d/1Fy4jLHwgboCZvqC4CcsHCD06umtlXym0/view?usp=drive_link)**
+- 📊 **[View the Pitch Deck](https://drive.google.com/file/d/1AVY104Kl4Vyo14P9YgIWm9Vo3rlwS98A/view?usp=drive_link)**
+
 - **Extension (`client/`)**: React 18, Vite, `@crxjs/vite-plugin`, Tailwind CSS v3.
 - **Backend (`server/`)**: Node.js, Express, CORS, and the Cline SDK (`@cline/sdk`).
 - **Mock WhatsApp page (`mock/`)**: a local page that imitates WhatsApp Web's message bubbles, for testing without a real account.
