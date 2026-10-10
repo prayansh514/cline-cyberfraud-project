@@ -9,37 +9,26 @@
 // closest. Step 102 will extend them (comma-joined) with the verified live selectors and keep the mock ones as a fallback.
 
 // Chat pane (the scrollable message list), tried in order. The first match wins.
-//   '[role="application"]'  [mock]  also a [live?] candidate for the WhatsApp message list.
-//   '#main'                 [live?] WhatsApp's conversation column, used when the first selector finds nothing.
 export const CHAT_PANE_SELECTORS = ['[role="application"]', '#main']
 
-// Incoming message row. [mock]. `div.message-in` is also a [live?] candidate (historically used by WhatsApp Web).
-export const INCOMING_ROW = '.message-in'
+// Incoming message row. Combined [mock] and [live]. 
+export const INCOMING_ROW = '.message-in, div[data-testid="msg-container"]'
 
-// Outgoing message row. The scanner must IGNORE these. [mock] and [live?], same caveat as above.
-export const OUTGOING_ROW = '.message-out'
+// Outgoing message row. The scanner must IGNORE these.
+// We use the :has() pseudo-class to identify live msg-containers that have the outgoing tail.
+export const OUTGOING_ROW = '.message-out, div[data-testid="msg-container"]:has([data-testid="tail-out"])'
 
-// The message bubble: the box the red/amber outline and the warning banner go on. [mock]. [live?] unverified.
-// If it is not found inside a row, the intervention falls back to the row itself.
-export const BUBBLE = '.bubble'
+// The message bubble: the box the red/amber outline and the warning banner go on. 
+export const BUBBLE = '.bubble, div[data-testid="msg-container"]'
 
-// The element that holds the message text. [mock] and [live?] (`span.selectable-text` has long been used by WhatsApp).
-export const MESSAGE_TEXT = 'span.selectable-text'
+// The element that holds the message text. Combined [mock] and [live].
+export const MESSAGE_TEXT = 'span.selectable-text, span[data-testid="selectable-text"]'
 
-// Container carrying the "[time, date] Sender: " attribute, used later to learn the sender name for anonymizing. [mock], [live?].
+// Container carrying the "[time, date] Sender: " attribute for anonymization.
 export const PRE_PLAIN_TEXT = '[data-pre-plain-text]'
 
 // ---- File attachments (Step 53a) ----
-
-// Attachment container inside a message row. [mock only]. Live selector UNKNOWN until Step 101.
-//   Hypothesis to test in DevTools, not to trust: an element found through a `data-icon` attribute on the document
-//   icon, then walking up to the bubble.
+// Live selectors still UNKNOWN until you test a live APK in Step 104a.
 export const ATTACHMENT_CONTAINER = '.document-attachment'
-
-// Element that shows the file name, for example "SBI_Rewards_Update.apk". [mock only]. Live selector UNKNOWN until Step 101.
-//   Hypothesis: the element with a `title` attribute holding the file name, or the visible text beside the icon.
 export const ATTACHMENT_FILENAME = '.attachment-filename'
-
-// Download control the extension disables on a Malicious attachment. [mock only]. Live selector UNKNOWN until Step 101.
-//   Hypothesis: a `role="button"` element with a `title` attribute.
 export const ATTACHMENT_DOWNLOAD = 'a.attachment-download'
