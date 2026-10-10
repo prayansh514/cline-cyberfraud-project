@@ -1,0 +1,52 @@
+[
+  {
+    "id": "TC-01",
+    "text": "Hi, are we meeting at 5 pm?",
+    "expected": "Safe"
+  },
+  {
+    "id": "TC-02",
+    "text": "Interesting read on the monsoon forecast: https://www.thehindu.com/news/national/monsoon-forecast/article12345.ece",
+    "expected": "Safe"
+  },
+  {
+    "id": "TC-03",
+    "text": "Dear customer, your SBI account will be blocked today. Update KYC now: http://sbi-kyc-update.xyz/login",
+    "expected": "Malicious"
+  },
+  {
+    "id": "TC-04",
+    "text": "Share the OTP you received to claim your refund of Rs 4,999",
+    "expected": "Suspicious"
+  },
+  {
+    "id": "TC-05",
+    "text": "Congratulations! You won Rs 25,00,000 in the KBC lottery. Call +91 98XXXXXX10 and pay the processing fee.",
+    "expected": "Malicious"
+  },
+  {
+    "id": "TC-07",
+    "text": "Claim your free gift now: https://bit.ly/3xFr33G1ft",
+    "expected": "Suspicious"
+  },
+  {
+    "id": "TC-08",
+    "text": "Hi [NAME], your a/c [NUMBER] is blocked, call [PHONE] or mail [EMAIL]",
+    "expected": "Suspicious"
+  },
+  {
+    "id": "TC-10",
+    "text": "SBI_Rewards_Update.apk",
+    "expected": "Malicious"
+  },
+  {
+    "id": "APK-02",
+    "text": "Please install our official bank app from this APK file",
+    "expected": "Malicious"
+  },
+  {
+    "id": "TC-11",
+    "text": "Invoice_March.pdf",
+    "expected": "Safe"
+  }
+]

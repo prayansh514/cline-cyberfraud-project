@@ -1,0 +1,12 @@
+/* Tailwind for the banner and badge that are injected into WhatsApp Web. Imported with "?inline" so the compiled CSS
+   is a string that is placed inside each Shadow DOM root only (see src/content/banner.js). It is never added to the
+   page's own <head>, so it cannot restyle WhatsApp.
+   This file deliberately has NO "@tailwind base": base is Tailwind's global reset (preflight), which the popup uses
+   (src/styles/tailwind.css) but which must never be part of what we inject. The banner only needs utilities. */
+@tailwind components;
+@tailwind utilities;
+
+/* Scoped reset. This stylesheet only ever lives inside a shadow root, so these rules cannot touch WhatsApp. */
+:host { all: initial; display: block; font-family: ui-sans-serif, system-ui, "Segoe UI", Helvetica, Arial, sans-serif; }
+*, ::before, ::after { box-sizing: border-box; border-width: 0; border-style: solid; }
+button { font: inherit; cursor: pointer; border: 0; }

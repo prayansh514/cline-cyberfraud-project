@@ -1,0 +1,11 @@
+# 💻 Tech Stack & Architecture
+- **Frontend:** React (in the `/client` directory).
+- **Backend:** Node.js with Express (in the `/server` directory).
+- **Language:** JavaScript/TypeScript.
+
+# 📂 Dual-Environment Navigation
+- **Crucial:** This project contains two separate `package.json` files. 
+- Always verify which directory you are operating in before running `npm install` or executing scripts. 
+- Put backend dependencies (like `express`, `cors`, `mongoose`) in `/server`.
+- Put frontend dependencies (like `axios`, `lucide-react`) in `/client`.
+- When modifying the API, ensure you update the Express route in `/server` and the corresponding fetch/axios call in `/client`.

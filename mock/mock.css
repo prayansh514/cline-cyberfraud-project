@@ -1,0 +1,45 @@
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; font-family: "Segoe UI", Helvetica, Arial, sans-serif; background: #d9d4cc; }
+#app { display: flex; gap: 16px; padding: 16px; height: 100%; }
+
+/* Chat column: mimics WhatsApp Web's #main with a header and a scrollable message list. */
+#main { flex: 1; display: flex; flex-direction: column; min-width: 0; background: #efeae2; border: 1px solid #c8c3bb; border-radius: 8px; overflow: hidden; }
+#main > header { background: #008069; color: #fff; padding: 12px 16px; display: flex; flex-direction: column; gap: 2px; }
+#main > header small { opacity: 0.8; font-size: 12px; }
+[role="application"] { flex: 1; overflow-y: auto; padding: 16px 8% 16px 84px; display: flex; flex-direction: column; gap: 8px; }
+
+/* Message rows. */
+.message-in, .message-out { display: flex; position: relative; }
+.message-in { justify-content: flex-start; }
+.message-out { justify-content: flex-end; }
+.bubble { max-width: 70%; padding: 6px 8px 4px; border-radius: 8px; box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13); overflow-wrap: anywhere; font-size: 14px; color: #111b21; }
+.message-in .bubble { background: #ffffff; border-top-left-radius: 0; }
+.message-out .bubble { background: #d9fdd3; border-top-right-radius: 0; }
+.timestamp { display: block; text-align: right; font-size: 11px; color: #667781; margin-top: 2px; }
+.bubble a { color: #027eb5; }
+
+/* File attachment (document message) inside a bubble. */
+.document-attachment { display: flex; align-items: center; gap: 10px; background: #f5f6f6; border-radius: 6px; padding: 8px 10px; min-width: 260px; }
+.attachment-icon { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 40px; border-radius: 4px; background: #7f66ff; color: #fff; font-size: 11px; font-weight: 700; }
+.attachment-info { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.attachment-filename { font-size: 14px; }
+.attachment-meta { font-size: 12px; color: #667781; }
+.attachment-download { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border: 1px solid #667781; border-radius: 50%; color: #667781; text-decoration: none; }
+
+/* Test panel (outside the chat pane). */
+#test-panel { width: 340px; flex-shrink: 0; background: #fff; border: 1px solid #c8c3bb; border-radius: 8px; padding: 12px 14px; overflow-y: auto; font-size: 13px; color: #111b21; }
+#test-panel h2 { margin: 0 0 8px; font-size: 15px; }
+.button-group { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.button-group button { font: inherit; padding: 6px 10px; border: 1px solid #008069; border-radius: 6px; background: #fff; color: #008069; cursor: pointer; }
+.button-group button:hover { background: #e7f5f2; }
+
+.rerender-group { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 14px; }
+.rerender-group select, .rerender-group button { font: inherit; padding: 5px 8px; }
+#legend { width: 100%; border-collapse: collapse; margin-bottom: 14px; font-size: 12px; }
+#legend th, #legend td { border: 1px solid #d1d7db; padding: 4px 6px; text-align: left; vertical-align: top; }
+#legend thead th { background: #f0f2f5; }
+#scamguard-test-log { min-height: 90px; border: 1px dashed #8696a0; border-radius: 6px; padding: 6px 8px; background: #fafafa; white-space: pre-wrap; }
+#scamguard-test-log:empty::before { content: "Type manual test results here..."; color: #8696a0; }
+
+/* Test-case label drawn with CSS so it never becomes part of the message text (textContent/innerText). */
+[data-testcase]::before { content: attr(data-testcase); position: absolute; left: -68px; top: 4px; width: 60px; font: 10px/1.2 Consolas, monospace; color: #6b7280; }

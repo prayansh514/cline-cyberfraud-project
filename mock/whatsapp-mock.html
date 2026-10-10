@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ScamGuard - Mock WhatsApp Web</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="mock.css">
+</head>
+<body>
+  <div id="app">
+    <div id="main">
+      <header>
+        <strong>ScamGuard Test Chat</strong>
+        <small>Mock of WhatsApp Web message bubbles, for local testing only</small>
+      </header>
+      <!--
+        Selectors the ScamGuard scanner will target (mock structure imitating WhatsApp Web):
+          incoming row ........ div.message-in
+          outgoing row ........ div.message-out        (the scanner must IGNORE these)
+          bubble .............. div.bubble
+          text container ...... div.copyable-text[data-pre-plain-text="[time, date] Sender: "]
+          message text ........ span.selectable-text.copyable-text
+          timestamp ........... span.timestamp
+        Each row carries data-testcase="TC-xx". The label is drawn by CSS (::before), so it is never part of the message text.
+      -->
+      <div id="chat-pane" role="application" aria-label="Message list">
+
+        <div class="message-in" data-testcase="TC-01">
+          <div class="bubble">
+            <div class="copyable-text" data-pre-plain-text="[10:42, 10/10/2026] Asha: ">
+              <span class="selectable-text copyable-text">Hi, are we meeting at 5 pm?</span>
+            </div>
+            <span class="timestamp">10:42</span>
+          </div>
+        </div>
+
+        <div class="message-in" data-testcase="TC-02">
+          <div class="bubble">
+            <div class="copyable-text" data-pre-plain-text="[10:43, 10/10/2026] Asha: ">
+              <span class="selectable-text copyable-text">Interesting read on the monsoon forecast: <a href="https://www.thehindu.com/news/national/monsoon-forecast/article12345.ece" target="_blank" rel="noopener">https://www.thehindu.com/news/national/monsoon-forecast/article12345.ece</a></span>
+            </div>
+            <span class="timestamp">10:43</span>
+          </div>
+        </div>
+
+        <div class="message-in" data-testcase="TC-03">
+          <div class="bubble">
+            <div class="copyable-text" data-pre-plain-text="[10:44, 10/10/2026] SBI Alerts: ">
+              <span class="selectable-text copyable-text">Dear customer, your SBI account will be blocked today. Update KYC now: <a href="http://sbi-kyc-update.xyz/login" target="_blank" rel="noopener">http://sbi-kyc-update.xyz/login</a></span>
+            </div>
+            <span class="timestamp">10:44</span>
+          </div>
+        </div>
+
+        <div class="message-in" data-testcase="TC-04">
+          <div class="bubble">
+            <div class="copyable-text" data-pre-plain-text="[10:45, 10/10/2026] Refund Desk: ">
+              <span class="selectable-text copyable-text">Share the OTP you received to claim your refund of Rs 4,999</span>
+            </div>
+            <span class="timestamp">10:45</span>
+          </div>
+        </div>
+
+        <div class="message-in" data-testcase="TC-05">
+          <div class="bubble">
+            <div class="copyable-text" data-pre-plain-text="[10:46, 10/10/2026] KBC Winners: ">
+              <span class="selectable-text copyable-text">Congratulations! You won Rs 25,00,000 in the KBC lottery. Call +91 98XXXXXX10 and pay the processing fee.</span>
+            </div>
+            <span class="timestamp">10:46</span>
+          </div>
+        </div>
+
+        <div class="message-in" data-testcase="TC-06">
+          <div class="bubble">
+            <div class="copyable-text" data-pre-plain-text="[10:47, 10/10/2026] +91 98765 43210: ">
+              <span class="selectable-text copyable-text">+91 98765 43210</span>
+            </div>
+            <span class="timestamp">10:47</span>
+          </div>
+        </div>
+
+        <div class="message-in" data-testcase="TC-07">
+          <div class="bubble">
+            <div class="copyable-text" data-pre-plain-text="[10:48, 10/10/2026] Gift Zone: ">
+              <span class="selectable-text copyable-text">Claim your free gift now: <a href="https://bit.ly/3xFr33G1ft" target="_blank" rel="noopener">https://bit.ly/3xFr33G1ft</a></span>
+            </div>
+            <span class="timestamp">10:48</span>
+          </div>
+        </div>
+
+        <div class="message-in" data-testcase="TC-08">
+          <div class="bubble">
+            <div class="copyable-text" data-pre-plain-text="[10:49, 10/10/2026] Customer Care: ">
+              <span class="selectable-text copyable-text">Hi Rahul Sharma, your a/c 123456789012 is blocked, call 9876543210 or mail rahul@example.com</span>
+            </div>
+            <span class="timestamp">10:49</span>
+          </div>
+        </div>
+
+        <!--
+          File attachments (Step 31a). Imitates a WhatsApp document message: no span.selectable-text.
+            attachment container ... div.document-attachment
+            filename ............... span.attachment-filename
+            download control ....... a.attachment-download
+        -->
+        <div class="message-in" data-testcase="TC-10">
+          <div class="bubble">
+            <div class="document-attachment">
+              <span class="attachment-icon" aria-hidden="true">APK</span>
+              <div class="attachment-info">
+                <span class="attachment-filename">SBI_Rewards_Update.apk</span>
+                <span class="attachment-meta">APK, 12 MB</span>
+              </div>
+              <a class="attachment-download" href="#mock-download-SBI_Rewards_Update.apk" download="SBI_Rewards_Update.apk" aria-label="Download">&#8681;</a>
+            </div>
+            <span class="timestamp">10:51</span>
+          </div>
+        </div>
+
+        <div class="message-in" data-testcase="TC-11">
+          <div class="bubble">
+            <div class="document-attachment">
+              <span class="attachment-icon" aria-hidden="true">PDF</span>
+              <div class="attachment-info">
+                <span class="attachment-filename">Invoice_March.pdf</span>
+                <span class="attachment-meta">PDF, 84 kB</span>
+              </div>
+              <a class="attachment-download" href="#mock-download-Invoice_March.pdf" download="Invoice_March.pdf" aria-label="Download">&#8681;</a>
+            </div>
+            <span class="timestamp">10:52</span>
+          </div>
+        </div>
+
+        <div class="message-out" data-testcase="TC-09">
+          <div class="bubble">
+            <div class="copyable-text" data-pre-plain-text="[10:50, 10/10/2026] You: ">
+              <span class="selectable-text copyable-text">Is this real? <a href="http://sbi-kyc-update.xyz/login" target="_blank" rel="noopener">http://sbi-kyc-update.xyz/login</a></span>
+            </div>
+            <span class="timestamp">10:50</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Test panel: deliberately OUTSIDE #chat-pane so the scanner never sees these controls. -->
+    <aside id="test-panel" aria-label="ScamGuard test controls">
+      <h2>Test controls</h2>
+      <div class="button-group">
+        <button type="button" id="btn-add-scam">Add scam message</button>
+        <button type="button" id="btn-add-safe">Add safe message</button>
+        <button type="button" id="btn-add-burst">Add burst of 5</button>
+        <button type="button" id="btn-add-apk">Add APK attachment</button>
+        <button type="button" id="btn-reset">Reset chat</button>
+      </div>
+
+      <!-- Step 33: replaces one static bubble with a fresh, identical node (WhatsApp re-creates nodes on scroll). -->
+      <div class="rerender-group">
+        <label for="rerender-target">Re-render bubble:</label>
+        <select id="rerender-target">
+          <option>TC-01</option><option>TC-02</option><option selected>TC-03</option><option>TC-04</option>
+          <option>TC-05</option><option>TC-06</option><option>TC-07</option><option>TC-08</option>
+          <option>TC-09</option><option>TC-10</option><option>TC-11</option>
+        </select>
+        <button type="button" id="btn-rerender">Re-render bubble</button>
+      </div>
+
+      <!-- Step 34: legend of expected outcomes (data-legend, not data-testcase, so it is never counted as a bubble). -->
+      <h2>Legend: expected outcomes</h2>
+      <table id="legend">
+        <thead><tr><th>Case</th><th>Message</th><th>Expected</th></tr></thead>
+        <tbody>
+          <tr data-legend="TC-01"><td>TC-01</td><td>Safe chat</td><td>Ignored by the pre-filter; never sent to the backend</td></tr>
+          <tr data-legend="TC-02"><td>TC-02</td><td>Safe link</td><td>Scanned; Safe; no outline</td></tr>
+          <tr data-legend="TC-03"><td>TC-03</td><td>KYC scam link</td><td>Malicious; red outline; link disabled</td></tr>
+          <tr data-legend="TC-04"><td>TC-04</td><td>OTP scam</td><td>Suspicious or Malicious</td></tr>
+          <tr data-legend="TC-05"><td>TC-05</td><td>Lottery scam</td><td>Malicious</td></tr>
+          <tr data-legend="TC-06"><td>TC-06</td><td>Unknown number only</td><td>Scanned (phone number rule)</td></tr>
+          <tr data-legend="TC-07"><td>TC-07</td><td>Shortened bit.ly link</td><td>Suspicious or Malicious</td></tr>
+          <tr data-legend="TC-08"><td>TC-08</td><td>Message with personal details</td><td>Scanned; anonymized before sending (tests the anonymizer)</td></tr>
+          <tr data-legend="TC-09"><td>TC-09</td><td>Outgoing scam-like message</td><td>Ignored (outgoing)</td></tr>
+          <tr data-legend="TC-10"><td>TC-10</td><td>APK attachment (SBI_Rewards_Update.apk)</td><td>Filename extracted; flagged by the .apk rule; Malicious; red outline; download control disabled</td></tr>
+          <tr data-legend="TC-11"><td>TC-11</td><td>Non-APK attachment (Invoice_March.pdf)</td><td>Filename extracted; not flagged; never sent to the backend; no outline</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Step 34: manual results area. No script on this page ever writes to it; testers type notes here. -->
+      <h2>Test log</h2>
+      <div id="scamguard-test-log" contenteditable="true" aria-label="Manual test results"></div>
+    </aside>
+  </div>
+  <script src="mock.js"></script>
+</body>
+</html>
