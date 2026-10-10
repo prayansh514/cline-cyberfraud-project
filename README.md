@@ -121,9 +121,4 @@ project.md  blueprint
 roadmap.md  build checklist
 ```
 
-## Known limitations
-
-- **Live WhatsApp Web is not validated yet.** Everything was tested on the mock page. WhatsApp's real page uses obfuscated markup, so the selectors in `client/src/content/selectors.js` are the mock page's. Replace them as described in Phase 14 of `roadmap.md` before relying on it for real chats, and test only with a test account.
-- **Attachments are judged by file name only.** A scam APK renamed to something harmless, or sent inside a zip, will not be caught. The file's contents are never read.
-- **Local use only.** The backend allows any origin (CORS) and has no authentication, so run it on localhost and do not expose it to the internet.
 
