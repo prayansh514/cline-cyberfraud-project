@@ -746,11 +746,11 @@ Source blueprint: `project.md` (same folder). This roadmap builds the **React Ch
     ```
   - **How to Test / Verification:** `npm run dev` from the root starts all three processes. `http://localhost:5000/api/health` responds, the mock page loads at `http://localhost:5500/whatsapp-mock.html`, and Vite is running.
 
-- [ ] **Step 108: Write a root `README.md` (prerequisites, install steps for `/server` and `/client`, `.env` setup, how to load the unpacked extension, how to run the mock page, and the "JavaScript only" policy)**
+- [x] **Step 108: Write a root `README.md` (prerequisites, install steps for `/server` and `/client`, `.env` setup, how to load the unpacked extension, how to run the mock page, and the "JavaScript only" policy)**
   - **Terminal Setup Commands:** None.
   - **How to Test / Verification:** A teammate (or you, in a fresh clone) can follow only the README and get a working setup.
 
-- [ ] **Step 109: Do a fresh-clone dry run (commit your work first, or the clone will be empty)**
+- [x] **Step 109: Do a fresh-clone dry run (commit your work first, or the clone will be empty)**
   - **Terminal Setup Commands:**
     ```
     cd c:\recovered\hackathon
@@ -765,7 +765,8 @@ Source blueprint: `project.md` (same folder). This roadmap builds the **React Ch
     ```
   - **How to Test / Verification:** Both installs and the build succeed on the clone, and its `client\dist` loads in Chrome.
 
-- [ ] **Step 110: Produce the production build and reload it**
+- [x] **Step 110: Produce the production build and reload it**
+  - **Implementation note:** the build was made with no dev server running (a dev server rewrites `dist` with a dev-mode loader). The production `dist` has no reference to `localhost:5173`. The Step 87 regression was re-run against this production build with the real agent: all 11 cases and the live APK button gave the same results as dev mode.
   - **Terminal Setup Commands:**
     ```
     cd c:\recovered\hackathon\client
@@ -773,21 +774,24 @@ Source blueprint: `project.md` (same folder). This roadmap builds the **React Ch
     ```
   - **How to Test / Verification:** Reload the unpacked extension from `client\dist` and rerun the mock regression (Step 87). The results are identical to dev mode.
 
-- [ ] **Step 111: Write the demo script (a 3-minute flow: open the mock page, show a safe message ignored, send a KYC scam and show the red outline and explanation, then repeat on live WhatsApp Web with a test account), with a fallback plan (`USE_STUB=true`, mock page only) in case Wi-Fi or the LLM fails**
+- [x] **Step 111: Write the demo script (a 3-minute flow: open the mock page, show a safe message ignored, send a KYC scam and show the red outline and explanation, then repeat on live WhatsApp Web with a test account), with a fallback plan (`USE_STUB=true`, mock page only) in case Wi-Fi or the LLM fails**
   - **Terminal Setup Commands:** None.
+  - **Implementation note:** the script is `DEMO.md` (repo root). It was run start to finish twice on the production build: with the real agent (17.2 s of machine time, all checks pass) and with `USE_STUB=true` and the internet blocked (7.8 s, all checks pass). **The "about 3 minutes" part is human speaking pace, which an automated run cannot measure**: the script's own timings add up to 2:50, but it still needs one out-loud rehearsal with a stopwatch.
   - **How to Test / Verification:** Run through the script start to finish once with a timer, and again with `USE_STUB=true` and the network disabled. Both complete in about 3 minutes.
 
-- [ ] **Step 112: Final compliance sweep**
+- [x] **Step 112: Final compliance sweep**
   - **Terminal Setup Commands:**
     ```
     cd c:\recovered\hackathon
     dir /s /b *.ts *.tsx tsconfig*.json 2>nul | findstr /v /i "node_modules"
     git status
     cd server
-    node --test agent/
+    node --test "agent/*.test.js" "middleware/*.test.js"
     cd ..\client
     npm test
     ```
+    (Corrected during implementation: `node --test agent/` fails on Node 22 with `Cannot find module`; use the quoted globs. Also run the `dir` guard from a Windows `cmd.exe`: in a bash-style shell `2>nul` creates a stray file named `nul` that breaks `git add`.)
+  - **Result:** no TypeScript files or packages (tracked or in the working tree); `server/.env` is git-ignored and not tracked, and the API key appears in no tracked file or document; 16 server and 31 client unit tests pass (parser, prompt hardening, rate limiter, pre-filter, anonymizer, cache, limiter).
   - **How to Test / Verification:** There is no TypeScript output, `.env` is not tracked, and all unit tests (the parser, pre-filter and anonymizer) pass.
 
 ---
